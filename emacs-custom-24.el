@@ -7,10 +7,9 @@
  '(column-number-mode t)
  '(ispell-program-name "/opt/local/bin/aspell")
  '(line-number-mode 1)
- '(ns-command-modifier (quote meta))
+ '(ns-command-modifier 'meta)
  '(safe-local-variable-values
-   (quote
-    ((c-offsets-alist
+   '((c-offsets-alist
       (inexpr-class . +)
       (inexpr-statement . +)
       (lambda-intro-cont . +)
@@ -105,7 +104,7 @@
       (statement-case-open after)
       (substatement after))
      (c-comment-only-line-offset . 0)
-     (c-tab-always-indent . t))))
+     (c-tab-always-indent . t)))
  '(tool-bar-mode nil)
  '(transient-mark-mode 1))
 (custom-set-faces
@@ -113,7 +112,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "color-256" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 113 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
+ '(default ((t (:inherit nil :stipple nil :background "ivory" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 113 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
  '(cursor ((t (:background "purple"))))
  '(font-lock-builtin-face ((t (:foreground "orchid"))))
  '(font-lock-comment-face ((t (:foreground "sienna"))))

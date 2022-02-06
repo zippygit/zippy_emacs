@@ -712,7 +712,14 @@
 ;;Windows10       (setq custom-file "~/.emacs-custom-24.el")))
 ;;zippy (cond ((file-exists-p custom-file) (load-options-file custom-file))) ; NEW
 ;;Windows10 (cond ((file-exists-p custom-file) (load-file custom-file))) ; NEW
-(setq custom-file (concat (eval 'myhomedir) "/.emacs.d/emacs-custom-24.el"));
+(cond ((display-graphic-p)
+       ;; Graphical code goes here.
+       (setq custom-file (concat (eval 'myhomedir) "/.emacs.d/xemacs-custom.el"));
+       )
+      (t
+       ;; Console-specific code
+       (setq custom-file (concat (eval 'myhomedir) "/.emacs.d/emacs-custom-24.el"));
+       ))
 (load-file custom-file);
 
 
