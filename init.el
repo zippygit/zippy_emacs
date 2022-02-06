@@ -237,8 +237,6 @@
 (fset 'fixwhitespace
    [?\M-x ?r ?e ?p ?l ?a ?c ?e ?- ?s ?t ?r ?i ?n ?g return ?\C-q tab return ?  ?  return ?\M-< ?\M-x ?r ?e ?p ?l ?a ?c ?e ?- ?s ?t ?r ?i ?n ?g return ?\C-q ?\C-m return return ?\M-< M-f12 ?\M-' ?\C-x ?\C-s ?\C-x ?k return])
 
-;; (fset 'al2
-;;       [?\C-x ?r ?  ?a C-home ?\C-  C-end ?\C-\M-\\ ?\C-x ?r ?j ?a ?\C-x ?\C-x ?\C-x ?\C-x ?\C- ])
 (defun al ()
   "Run indent-region on entire file. Use to format an entire C++ file, for example."
   (interactive)
@@ -247,17 +245,14 @@
   (jump-to-register 97 nil) (exchange-point-and-mark) (exchange-point-and-mark)
   (set-mark-command nil))
 
-;; (defun date-stamp ()
-;;   "Prints the date and time in the current buffer at the point."
-;;   (interactive)
-;;   (shell-command "date" t)
-;;   )
-;; 20200319 Second option:
 (defun date-stamp ()
   "Prints the date and time in the current buffer at the point."
   (interactive)
   (insert (format-time-string "%a %b %e %Y %H:%M:%S"))
   )
+
+(setq desktop-base-file-name (concat ".emacs." (system-name) ".desktop") )
+(setq desktop-base-lock-name (concat ".emacs." (system-name) ".desktop.lock") )
 
 (defun ds ()
   "Save desktop (list of open files) to ~/.emacs.<hostname>.desktop. zippy"
@@ -373,18 +368,6 @@
   (font-lock-mode)
   )
 
-;; (defun timeout () "Replace date/time/pid/etc. strings from SPG logging output with x"
-;;   (interactive)
-;;   (beginning-of-buffer)
-;;   (replace-regexp "_LEVEL|.*|.*|.*|.*|" "_LEVEL|x|x|x|x|" nil nil nil)
-;;   (beginning-of-buffer)
-;;   (replace-regexp "\\[.*:.*:.*\\]" "[x:x:x]" nil nil nil)
-;;   (beginning-of-buffer)
-;;   (replace-regexp "zippy_spark.*/" "zippy_spark/" nil nil nil)
-;;   (beginning-of-buffer)
-;;   (replace-string "
-;; " "" nil nil nil))
-
 (defalias 'tidy (read-kbd-macro
 "C-r ... SPC C-a C-SPC C-s java C-f C-x C-x C-x C-x C-SPC C-r affected SPC files SPC 2*<C-n> C-a C-x C-x C-x r k 2*<C-n>"))
 
@@ -397,9 +380,6 @@
 (defalias 'fl (read-kbd-macro "M-x font-lock-fontify-buffer RET"))
 
 (defalias 'fp (read-kbd-macro "M-x fill-paragraph RET"))
-
-;(defalias 'gu (read-kbd-macro
-;"C-e 2*<M-b> M-SPC 2*<M-f> M-w C-a RET C-n RET 3*<C-p> #ifndef SPC C-y 2*<C-b> C-d _ M-b M-x upd <backspace> case- word RET 2*<C-n> #endif C-n C-a"))
 
 (defalias 'gu (read-kbd-macro
 "C-s > C-e C-r . C-SPC M-b M-w C-a RET C-p #ifndef SPC C-y _h C-SPC 2*<M-b> M-x upcase- reg TAB RET C-n C-e RET #endif C-n C-a"))
@@ -449,26 +429,14 @@
 (add-hook 'text-mode-hook 'turn-on-filladapt-mode)
 (add-hook 'c++-mode-hook 'turn-on-filladapt-mode)
 (require 'filladapt) ; This smart-indent numbered/bulleted lists and such
-;;???how to do (require 'show-paren-mode) ; Visually indicate matching parens/braces/brackets
 (show-paren-mode 1)
 (setq show-paren-delay 0)
 ;;Windows10 (require 'igrep) ; igrep-visited-files and other grep enhancements
-
-;;-----------------------------------------------------------------------
-;; Clearcase stuff
-;;-----------------------------------------------------------------------
-;;Doesn't work with Cocoa Emacs 24 20120905 (require 'clearcase)
-;;(require 'vc-clearcase) ;;try again later
 
 ;; More from Colin Rafferty:
 ;;zippy (global-set-key [(return)] 'newline-and-indent)
 ;;zippy (global-set-key [(linefeed)] 'newline)
 (global-set-key [(linefeed)] 'newline-and-indent)
-
-;; Set up VC to be a better citizen.
-;;trynotwithclearcasezippy (require 'vc)
-;(require 'vc-fix)
-
 
 ;; Stuff from file I copied to modify that might be useful someday:
 ;(setq text-mode-hook '(lambda () (auto-fill-mode 1))) ;auto fill in text mode.
@@ -698,20 +666,6 @@
 ;;-----------------------------------------------------------------------
 ;; Faces (fonts and colors for font-lock and other modes)
 ;;-----------------------------------------------------------------------
-
-;; NEW setup to save fonts and faces in .xemacs-options. Don't put in
-;; the full path from $HOME because it already prepends the current working
-;; directory, which will be $HOME since this .emacs file lives there:
-;;20120905 (setq custom-file "~/.xemacs-options")
-;;Windows10(cond ((< emacs-major-version 24)
-;;Windows10       ;; Emacs <24  customization.
-;;Windows10  (desktop-save "~/")
-;;Windows10       (setq custom-file "~/.xemacs-options"))
-;;Windows10      (t
-       ;; Emacs version 24 or later.
-;;Windows10       (setq custom-file "~/.emacs-custom-24.el")))
-;;zippy (cond ((file-exists-p custom-file) (load-options-file custom-file))) ; NEW
-;;Windows10 (cond ((file-exists-p custom-file) (load-file custom-file))) ; NEW
 (cond ((display-graphic-p)
        ;; Graphical code goes here.
        (setq custom-file (concat (eval 'myhomedir) "/.emacs.d/xemacs-custom.el"));
@@ -721,14 +675,6 @@
        (setq custom-file (concat (eval 'myhomedir) "/.emacs.d/emacs-custom-24.el"));
        ))
 (load-file custom-file);
-
-
-;;-----------------------------------------------------------------------
-;; XEmacs options file
-;;-----------------------------------------------------------------------
-(setq options-save-faces t)    ; Save faces w/options in .xemacs-options
-(setq save-options-file (concat (eval 'myhomedir) "/.emacs.d/options.el"))      ;
-(setq save-options-init-file (concat (eval 'myhomedir) "/.emacs.d/options.el")) ;
 
 
 ;;-----------------------------------------------------------------------
@@ -855,23 +801,6 @@
 (autoload 'matlab-mode "matlab" "Enter MATLAB mode." t)
 (setq auto-mode-alist (cons '("\\.m\\'" . matlab-mode) auto-mode-alist))
 (autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
-
-
-;;-------------------------------------------------------------------------
-;; desktop.el saves files opened and reopens them next emacs session
-;;-------------------------------------------------------------------------
-(if (< emacs-major-version 27)
-    (desktop-load-default))
-;;notelvis (setq desktop-buffer-file-name (concat ".emacs." (getenv "hnanl" ) ".desktop") )
-;;notelvis (setq desktop-buffer-name (concat ".emacs." (getenv "hnanl" ) ".desktop") )
-;;notelvis broke? (setq desktop-basefilename (concat ".emacs." (getenv "hnanl" ) ".desktop") )desktop-basefilename
-;;notelvis (setq desktop-basefilename (concat ".emacs." (getenv "hnanl" ) ".desktop") )
-(setq desktop-buffer-file-name (concat ".emacs." "elvis" ".desktop") ) ;;elvis
-(setq desktop-buffer-name (concat ".emacs." "elvis" ".desktop") ) ;;elvis
-(setq desktop-basefilename (concat ".emacs." "elvis" ".desktop") ) ;;elvis
-;; (setq desktop-buffer-file-name "~/.emacs.elvis.desktop")
-;;  (set-variable 'hostname-message '$HOST ) ; How to make this work???
-;;(desktop-read)
 
 ;;-------------------------------------------------------------------------
 ;; Aquamacs stuff for Macintosh
