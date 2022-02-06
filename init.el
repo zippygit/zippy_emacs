@@ -668,7 +668,7 @@
 ;;-----------------------------------------------------------------------
 (cond ((display-graphic-p)
        ;; Graphical code goes here.
-       (setq custom-file (concat (eval 'myhomedir) "/.emacs.d/xemacs-custom.el"));
+       (setq custom-file (concat (eval 'myhomedir) "/.emacs.d/xemacs-" (system-name) "-custom.el"));
        )
       (t
        ;; Console-specific code
