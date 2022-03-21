@@ -170,7 +170,7 @@
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tab-width 4)
- '(text-mode-hook '(set-auto-fill text-mode-hook-identify))
+ '(text-mode-hook '(toggle-text-mode-auto-fill text-mode-hook-identify))
  '(today-visible-calendar-hook '(calendar-mark-today))
  '(tool-bar-mode nil nil (tool-bar))
  '(transient-mark-mode 1)
@@ -188,7 +188,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :extend nil :stipple nil :background "White" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "nil" :family "Monaco"))))
- '(bold ((t (:foreground "gold4" :slant normal :weight bold :height 90 :width normal :foundry "b&h" :family "lucidatypewriter"))))
+ '(bold ((t (:foreground "gold4" :slant normal :weight bold :height 130 :width normal :foundry "nil" :family "Monaco"))))
  '(calendar-today-face ((t (:foreground "deeppink1" :weight extra-bold))))
  '(cursor ((t (:background "purple" :foreground "orange"))))
  '(f90-mode-default ((t (:inherit autoface-default :height 130 :family "Monaco"))) t)
@@ -201,7 +201,7 @@
  '(fundamental-mode-default ((t (:inherit autoface-default :height 130 :family "Monaco"))) t)
  '(highlight ((((class color) (background light)) (:background "lightseagreen"))))
  '(isearch ((((class color) (background light)) (:background "lightpink" :inverse-video nil))))
- '(italic ((((supports :underline t)) (:foreground "purple" :underline t :slant italic :height 90 :width normal :foundry "b&h" :family "lucidatypewriter"))))
+ '(italic ((t (:foreground "purple" :underline t :slant italic :height 130 :width normal :foundry "nil" :family "Monaco"))))
  '(mode-line ((((type x w32 mac) (class color)) (:background "grey75" :foreground "black" :box (:line-width -1 :style released-button) :family "helv"))))
  '(nxml-attribute-local-name-face ((t (:foreground "firebrick"))))
  '(nxml-attribute-value-delimiter-face ((t (:inherit nxml-delimited-data-face))))

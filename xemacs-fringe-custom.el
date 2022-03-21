@@ -170,7 +170,7 @@
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tab-width 4)
- '(text-mode-hook '(set-auto-fill text-mode-hook-identify))
+ '(text-mode-hook '(toggle-text-mode-auto-fill text-mode-hook-identify))
  '(today-visible-calendar-hook '(calendar-mark-today))
  '(tool-bar-mode nil nil (tool-bar))
  '(transient-mark-mode 1)
