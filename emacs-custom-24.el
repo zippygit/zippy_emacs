@@ -107,13 +107,24 @@
      (c-tab-always-indent . t)))
  '(tool-bar-mode nil)
  '(transient-mark-mode 1))
+
+;; Depending on the terminal emulator used to ssh in to the host running
+;; Emacs, the color string needed to make the default background color white
+;; may vary. I use the environment variable EMULATOR_OF_TERMINAL to indicate
+;; the terminal emulator of origin.
+
+(setq myWhiteBackgroundColor "white")
+(when (string= (getenv "EMULATOR_OF_TERMINAL") "winterm")
+  (setq myWhiteBackgroundColor "white"))
+(when (string= (getenv "EMULATOR_OF_TERMINAL") "iterm")
+  (setq myWhiteBackgroundColor ("brightwhite")))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- ;; '(default ((t (:inherit nil :stipple nil :background "brightwhite" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 113 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
-  '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 113 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
+ '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 113 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
  '(cursor ((t (:background "purple"))))
  '(font-lock-builtin-face ((t (:foreground "orchid"))))
  '(font-lock-comment-face ((t (:foreground "sienna"))))
@@ -126,3 +137,4 @@
  '(menu ((t (:background "color-158" :foreground "black"))))
  '(region ((t (:background "yellow1"))))
  '(secondary-selection ((t (:background "peachpuff")))))
+(set-face-attribute 'default nil :background myWhiteBackgroundColor)
