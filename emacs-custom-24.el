@@ -117,7 +117,7 @@
 (when (string= (getenv "EMULATOR_OF_TERMINAL") "winterm")
   (setq myWhiteBackgroundColor "white"))
 (when (string= (getenv "EMULATOR_OF_TERMINAL") "iterm")
-  (setq myWhiteBackgroundColor ("brightwhite")))
+  (setq myWhiteBackgroundColor "brightwhite"))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
