@@ -20,7 +20,7 @@
 (cond ((eq system-type 'windows-nt)
        (require 'package)
        (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-       (add-to-list 'load-path "~/.emacs.d/packages/")
+       (add-to-list 'load-path (concat (eval 'myhomedir) "~/.emacs.d/packages/"))
        ;;ispell replacement:
        ;; (set 'ispell-program-name "hunspell")
        ;; (setq ispell-hunspell-dict-paths-alist
@@ -264,7 +264,6 @@
 (defun ds ()
   "Save desktop (list of open files) to ~/.emacs.<hostname>.desktop. zippy"
   (interactive)
-;;Windows10   (desktop-save "~/")
   (desktop-save (concat (eval 'myhomedir) "/"))
   )
 
@@ -456,10 +455,14 @@
 (add-hook 'shell-mode-hook
           (function (lambda ()
 		      (setq comint-input-ring-file-name
-                            "~zippy/emacs/.shellhist"
-			    )
+                            (concat (eval 'myhomedir) "/.emacs.d/.shellhist")
+			                      )
 		      )))
 
+;;-----------------------------------------------------------------------
+;; AutoHotKey
+;;-----------------------------------------------------------------------
+(setq ahk-indentation 2)
 
 ;;-----------------------------------------------------------------------
 ;; C++
@@ -652,6 +655,7 @@
          ("\\.[k]sh\\'" . sh-mode)      ; ksh shell script files.
          ("\\.profile*$\\'" . sh-mode)  ; ksh shell script files.
          ("\\.envfile*$\\'" . sh-mode)  ; ksh shell script files.
+         ("\\.ahk*$\\'" . ahk-mode)     ; ahk (AutoHotKey) script files.
          ("\\.xrdb\\'" . xrdb-mode)     ; X resources files.
          )
        auto-mode-alist))
