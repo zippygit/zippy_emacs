@@ -10,12 +10,11 @@
        (setq myhomedir "/Users/zippy"); MacOS
        )
       ((eq system-type 'windows-nt)
-       (setq myhomedir "/Users/zippy"); Windows
+       (setq myhomedir "F:/Users/zippy/OneDrive"); Windows
        (setq-default buffer-file-coding-system 'utf-8-unix)
        ))
 (setq mydocumentsdir (concat (eval 'myhomedir) "/Documents")); Linux, MacOS
 ;;(setq mydocumentsdir "/mnt/f/Users/zippy/OneDrive/Documents"); WSL tdesk
-
 
 ;; Windows 10 specific stuff
 (cond ((eq system-type 'windows-nt)
@@ -23,15 +22,21 @@
        (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
        (add-to-list 'load-path "~/.emacs.d/packages/")
        ;;ispell replacement:
-       (set 'ispell-program-name "hunspell")
-       (setq ispell-hunspell-dict-paths-alist
-             '(("en_US" "c:/Hunspell/en_US.aff")
-               ("default" "c:/Hunspell/default.aff")))
-       (setq ispell-local-dictionary-alist
-             '(("default" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "default") nil utf-8)
-               ("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
-       (flyspell-mode 1)
+       ;; (set 'ispell-program-name "hunspell")
+       ;; (setq ispell-hunspell-dict-paths-alist
+       ;;       '(("en_US" "c:/Hunspell/en_US.aff")
+       ;;         ("default" "c:/Hunspell/default.aff")))
+       ;; (setq ispell-local-dictionary-alist
+       ;;       '(("default" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "default") nil utf-8)
+       ;;         ("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
+       ;; (flyspell-mode 1)
        ))
+
+;; package management
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t
+             ;;'("melpa-stable" . "https://stable.melpa.org/packages/") t
+             )
+(package-initialize)
 
 ;;-----------------------------------------------------------------------
 ;; Function keys and numeric keypad:
@@ -78,6 +83,8 @@
       '("%S: " (buffer-file-name "%f"
                                  (dired-directory dired-directory "%b"))))
 
+;; ahk (AutoHotKey) mode
+(setq ahk-indentation 2)
 
 ;;-----------------------------------------------------------------------
 ;; Other stuff to make Emacs work how I like it.
