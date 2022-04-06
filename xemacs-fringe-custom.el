@@ -69,6 +69,7 @@
  '(ns-right-command-modifier 'meta)
  '(ns-tool-bar-display-mode nil t)
  '(ns-tool-bar-size-mode nil t)
+ '(package-selected-packages '(filladapt))
  '(safe-local-variable-values
    '((c-offsets-alist
       (inexpr-class . +)
@@ -170,7 +171,6 @@
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tab-width 4)
- '(text-mode-hook '(toggle-text-mode-auto-fill text-mode-hook-identify))
  '(today-visible-calendar-hook '(calendar-mark-today))
  '(tool-bar-mode nil nil (tool-bar))
  '(transient-mark-mode 1)

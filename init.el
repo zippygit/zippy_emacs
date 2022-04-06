@@ -16,9 +16,10 @@
 (setq mydocumentsdir (concat (eval 'myhomedir) "/Documents")); Linux, MacOS
 ;;(setq mydocumentsdir "/mnt/f/Users/zippy/OneDrive/Documents"); WSL tdesk
 
+(require 'package)
 ;; Windows 10 specific stuff
 (cond ((eq system-type 'windows-nt)
-       (require 'package)
+;;       (require 'package)
        (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
        (add-to-list 'load-path (concat (eval 'myhomedir) "~/.emacs.d/packages/"))
        ;;ispell replacement:
@@ -33,9 +34,9 @@
        ))
 
 ;; package management
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/")
              ;;'("melpa-stable" . "https://stable.melpa.org/packages/") t
-             )
+	     )
 (package-initialize)
 
 ;;-----------------------------------------------------------------------
@@ -397,24 +398,9 @@
   (indent-region (region-beginning) (region-end) nil)
   )
 
-;; Perforce Description text highlight for typeover:
-(defalias 'pd
-  (read-kbd-macro "C-s Description: C-s C-n M-b C-b C-SPC C-e"))
-
-(defalias 'nsheadersfix (read-kbd-macro
-"C-e C-SPC C-n M-f M-b C-w C-n C-a C-SPC M-f M-b C-w C-e C-SPC C-n C-a M-f M-b C-w C-n C-a C-SPC M-f M-b C-w C-e C-SPC C-n C-a M-f M-b C-w C-n C-a C-SPC M-f M-b C-w C-e C-SPC C-n C-a M-f M-b C-w C-n C-a C-SPC M-f M-b C-w C-e C-SPC C-n C-a M-f M-b C-w C-n C-k"))
-
-;; Fix one line of email header cut from Netscape mail and pasted to Xemacs:
-(defalias 'hf (read-kbd-macro
-"C-s : M-b C-SPC C-a C-w C-s : C-e C-SPC M-f M-b C-SPC C-x C-x C-SPC C-p C-e C-w C-n C-a"))
-
-
 (defun f72 () "\nSet fill column to 72."
   (interactive)
   (set-fill-column 72))
-
-(defalias 'like043 (read-kbd-macro
-"C-s <ca C-a 2*<C-k> C-r <ra C-n C-a C-y C-s <accrualdcb C-a 2*<C-k> C-r <ra 2*<C-n> C-a C-y C-s <pa C-a 2*<C-k> C-r <ra 3*<C-n> C-a C-y C-s <accrualstartdate C-a 2*<C-k> C-r <ra 4*<C-n> C-a C-y C-s <cu C-a 2*<C-k> C-r <ra 5*<C-n> C-a C-y C-s <accruale C-a 2*<C-k> C-r <ra 6*<C-n> C-a C-y C-s <paydate C-a 2*<C-k> C-r <ra 7*<C-n> C-a C-y C-s <not C-a 2*<C-k> C-r <ra 8*<C-n> C-a C-y"))
 
 
 ;; For comparing jfidmath toString() outputs to C++ printit() outputs; this
@@ -425,8 +411,9 @@
 ;;-----------------------------------------------------------------------
 ;; General, and text-mode stuff
 ;;-----------------------------------------------------------------------
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'text-mode-hook 'turn-on-filladapt-mode)
+(add-hook 'text-mode-hook
+          '(lambda () (auto-fill-mode 1)))
+;; (add-hook 'text-mode-hook 'turn-on-filladapt-mode)
 (add-hook 'c++-mode-hook 'turn-on-filladapt-mode)
 (require 'filladapt) ; This smart-indent numbered/bulleted lists and such
 (show-paren-mode 1)
@@ -439,7 +426,6 @@
 (global-set-key [(linefeed)] 'newline-and-indent)
 
 ;; Stuff from file I copied to modify that might be useful someday:
-;(setq text-mode-hook '(lambda () (auto-fill-mode 1))) ;auto fill in text mode.
 ;(setq html-mode-hook '(lambda () (auto-fill-mode 0))) ;not in html mode.
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
@@ -515,11 +501,7 @@
 (defvar sf-auto-insert-header-unique-level 0)
 (defvar sf-auto-insert-java-class t)
 
-(defun sf-auto-insert-header-name (file-name pos)
-  ((read-string "Include guard to use: " auto-insert-string)
-   auto-insert-string))
-
-(defun spg-copyright-c (&optional comment)
+(defun anl-copyright-c (&optional comment)
   (let* ((c (or comment "//"))
 	 (bar (make-string 77 (elt c 0))))
     (concat
@@ -530,56 +512,52 @@
 (setq auto-insert-alist
       `((("\\.H$\\'" . "c++ header")
          (concat
-;;          "_spg_"
-;;          "_spgx_x"
           "_cdsmm_x"
-;;          (replace-regexp "n" "zzz" (file-name-directory buffer-file-name) )
           (replace-regexp "/" "zzz" (file-name-directory buffer-file-name) )
           "_"
           (file-name-sans-extension (file-name-nondirectory buffer-file-name))
           "_H_")
          "#ifndef " str "\n"
          "#define " str "\n\n"
-         (spg-copyright-c)
-;;          _ "\n\nnamespace mbspr\n{\n    namespace Core\n    {\n\n    }\n}\n\n#endif\n")
+         (anl-copyright-c)
          _ "\n\n#endif\n")
         (("\\.C$\\'" . "c++ body")
          ""
-         (spg-copyright-c)
+         (anl-copyright-c)
          _)
         (("\\.cpp$\\'" . "c++ body")
          ""
-         (spg-copyright-c)
+         (anl-copyright-c)
          _)
         (("\\.pl$\\'" . "perl")
          ""
          "#!/tp/bin/perl\n\n"
-         (spg-copyright-c "#")
+         (anl-copyright-c "#")
          _)
         (("\\.sh$\\'" . "shell script")
          ""
          "#!/bin/ksh\n\n"
-         (spg-copyright-c "#")
+         (anl-copyright-c "#")
          _)
         (("\\.ksh$\\'" . "shell script")
          ""
          "#!/bin/ksh\n\n"
-         (spg-copyright-c "#")
+         (anl-copyright-c "#")
          _)
         (("\\akefile$\\'" . "makefile")
          ""
          "# -*- Mode: makefile -*-\n\n"
-         (spg-copyright-c "#")
+         (anl-copyright-c "#")
          _)
         (("\\.mk$\\'" . "makefile")
          ""
          "# -*- Mode: makefile -*-\n\n"
-         (spg-copyright-c "#")
+         (anl-copyright-c "#")
          _)
         (("make.inc\\'" . "makefile")
          ""
          "# -*- Mode: makefile -*-\n\n"
-         (spg-copyright-c "#")
+         (anl-copyright-c "#")
          _)
       ))
 
