@@ -9,24 +9,22 @@
  '(auto-hscroll-mode nil)
  '(blink-cursor-mode nil)
  '(c-offsets-alist
-   (quote
-    ((template-args-cont . c-lineup-template-arglist)
+   '((template-args-cont . c-lineup-template-arglist)
      (substatement . 0)
      (substatement-open . 0)
      (inline-open . 0)
      (innamespace . 2)
-     (comment-intro . c-lineup-comment))))
- '(calendar-today-marker (quote calendar-today-face))
+     (comment-intro . c-lineup-comment)))
+ '(calendar-today-marker 'calendar-today-face)
  '(case-fold-search 1)
- '(clearcase-checkout-arguments (quote ("\"-unreserved\"")))
+ '(clearcase-checkout-arguments '("\"-unreserved\""))
  '(clearcase-keep-uncheckouts nil)
  '(clearcase-suppress-checkout-comments t)
  '(clearcase-viewroot "/lx-dgcv02/view_store")
  '(column-number-mode t)
  '(current-language-environment "ASCII")
  '(default-frame-alist
-    (quote
-     ((menu-bar-lines . 1)
+    '((menu-bar-lines . 1)
       (foreground-color . "black")
       (background-color . "ivory")
       (cursor-type . box)
@@ -35,13 +33,12 @@
       (left-fringe . 1)
       (right-fringe)
       (fringe)
-      (tool-bar-lines . 0))))
+      (tool-bar-lines . 0)))
  '(ediff-keep-variants t)
- '(ediff-split-window-function (quote split-window-horizontally))
+ '(ediff-split-window-function 'split-window-horizontally)
  '(emulate-mac-us-keyboard-mode t)
  '(filladapt-token-table
-   (quote
-    (("^" beginning-of-line)
+   '(("^" beginning-of-line)
      (">+" citation->)
      ("\\(\\w\\|[0-9]\\)[^'`\"< 	
 ]*>[ 	]*" supercite-citation)
@@ -64,17 +61,17 @@
      ("[\\@]\\(param\\|throw\\|exception\\|addtogroup\\|defgroup\\)[ 	]*[A-Za-z_][A-Za-z_0-9]*[ 	]+" bullet)
      ("[\\@][A-Za-z_]+[ 	]*" bullet)
      ("[ 	]+" space)
-     ("$" end-of-line))))
+     ("$" end-of-line)))
  '(ispell-program-name "/opt/local/bin/aspell")
  '(line-number-mode 1)
  '(mark-holidays-in-calendar t)
- '(ns-command-modifier (quote meta))
- '(ns-right-command-modifier (quote meta))
+ '(ns-command-modifier 'meta)
+ '(ns-right-command-modifier 'meta)
  '(ns-tool-bar-display-mode nil t)
  '(ns-tool-bar-size-mode nil t)
+ '(package-selected-packages '(ahk-mode))
  '(safe-local-variable-values
-   (quote
-    ((c-offsets-alist
+   '((c-offsets-alist
       (inexpr-class . +)
       (inexpr-statement . +)
       (lambda-intro-cont . +)
@@ -169,31 +166,30 @@
       (statement-case-open after)
       (substatement after))
      (c-comment-only-line-offset . 0)
-     (c-tab-always-indent . t))))
+     (c-tab-always-indent . t)))
  '(save-completions-flag t)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tab-width 4)
- '(text-mode-hook (quote (set-auto-fill text-mode-hook-identify)))
- '(today-visible-calendar-hook (quote (calendar-mark-today)))
+ '(text-mode-hook '(set-auto-fill text-mode-hook-identify))
+ '(today-visible-calendar-hook '(calendar-mark-today))
  '(tool-bar-mode nil nil (tool-bar))
  '(transient-mark-mode 1)
- '(uniquify-buffer-name-style (quote post-forward) nil (uniquify))
+ '(uniquify-buffer-name-style 'post-forward nil (uniquify))
  '(view-calendar-holidays-initially nil)
  '(visual-line-mode nil t)
  '(woman-fill-column 65)
  '(woman-fill-frame nil)
  '(woman-use-own-frame nil)
  '(x-bitmap-file-path
-   (quote
-    ("/usr/X11R6/include/X11/bitmaps:/usr/share/emacs/21.3/etc/"))))
+   '("/usr/X11R6/include/X11/bitmaps:/usr/share/emacs/21.3/etc/")))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "White" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
- '(bold ((t (:foreground "gold4" :slant normal :weight bold :height 90 :width normal :foundry "b&h" :family "lucidatypewriter"))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "White" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "outline" :family "Lucida Sans Typewriter"))))
+ '(bold ((t (:foreground "gold4" :slant normal :weight bold :height 110 :width normal :foundry "outline" :family "Lucida Sans Typewriter"))))
  '(calendar-today-face ((t (:foreground "deeppink1" :weight extra-bold))))
  '(cursor ((t (:background "purple" :foreground "orange"))))
  '(f90-mode-default ((t (:inherit autoface-default :height 130 :family "Monaco"))) t)
@@ -206,7 +202,7 @@
  '(fundamental-mode-default ((t (:inherit autoface-default :height 130 :family "Monaco"))) t)
  '(highlight ((((class color) (background light)) (:background "lightseagreen"))))
  '(isearch ((((class color) (background light)) (:background "lightpink" :inverse-video nil))))
- '(italic ((((supports :underline t)) (:foreground "purple" :underline t :slant italic :height 90 :width normal :foundry "b&h" :family "lucidatypewriter"))))
+ '(italic ((t (:foreground "purple" :underline t :slant italic :height 110 :width normal :foundry "outline" :family "Lucida Sans Typewriter"))))
  '(mode-line ((((type x w32 mac) (class color)) (:background "grey75" :foreground "black" :box (:line-width -1 :style released-button) :family "helv"))))
  '(nxml-attribute-local-name-face ((t (:foreground "firebrick"))))
  '(nxml-attribute-value-delimiter-face ((t (:inherit nxml-delimited-data-face))))
