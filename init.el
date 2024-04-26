@@ -37,7 +37,7 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/")
              ;;'("melpa-stable" . "https://stable.melpa.org/packages/") t
 	     )
-(package-initialize)
+;;make this 1st line of .emacs file:  (package-initialize)
 
 ;;-----------------------------------------------------------------------
 ;; Function keys and numeric keypad:
@@ -90,6 +90,14 @@
 ;;-----------------------------------------------------------------------
 ;; Other stuff to make Emacs work how I like it.
 ;;-----------------------------------------------------------------------
+
+;; Desktop save saves information about all open buffers etc. so the same
+;; emacs edit session may be restored after quitting and restarting.
+(desktop-save-mode 1)
+;; If environment variable hns is not defined in shell, it should still work,
+;; just with names .emacs..desktop and .emacs..desktop.lock:
+(setq desktop-base-file-name (concat ".emacs."  (getenv "hns") ".desktop") )
+(setq desktop-base-lock-name (concat ".emacs."  (getenv "hns") ".desktop.lock") )
 
 ;; Copiers of this file beware these changes:
 ;;(global-set-key "\C-z" 'undo) ;
@@ -158,7 +166,6 @@
 ;(local-set-key "\M-q" 'query-replace)
 ;(define-key global-map "\M-q" 'query-replace)
 
-(delete-selection-mode 1)                ; Set up to delete selection auto.
 (global-set-key "\C-xw" 'write-region)   ; Make ^xw write mark region to file.
 (global-set-key "\C-x\C-i" 'insert-file) ; Make ^x^i insert file at cursor.
 (global-set-key "\M- " 'set-mark-command); Make esc-space set mark.
@@ -257,15 +264,6 @@
   "Prints the date and time in the current buffer at the point."
   (interactive)
   (insert (format-time-string "%a %b %e %Y %H:%M:%S"))
-  )
-
-(setq desktop-base-file-name (concat ".emacs." (system-name) ".desktop") )
-(setq desktop-base-lock-name (concat ".emacs." (system-name) ".desktop.lock") )
-
-(defun ds ()
-  "Save desktop (list of open files) to ~/.emacs.<hostname>.desktop. zippy"
-  (interactive)
-  (desktop-save (concat (eval 'myhomedir) "/"))
   )
 
 (defun ir ()
@@ -795,3 +793,6 @@
 ;;-------------------------------------------------------------------------
 
 ;; list-command-history shows history of minibuffer commands for that buffer
+
+;; Put at end in case errors earlier in init break it:
+(delete-selection-mode 1)                ; Set up to delete selection auto.
