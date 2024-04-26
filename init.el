@@ -34,8 +34,9 @@
        ))
 
 ;; package management
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/")
-             ;;'("melpa-stable" . "https://stable.melpa.org/packages/") t
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/")
+             '("melpa-stable" . "https://stable.melpa.org/packages/")
 	     )
 ;;make this 1st line of .emacs file:  (package-initialize)
 
@@ -713,7 +714,7 @@
   (set-variable 'tjwps (concat (eval 'mydocumentsdir) "/printouts//" (file-name-nondirectory (buffer-file-name)) ".ps"))
   (set-variable 'tjwpdf (concat (eval 'mydocumentsdir) "/printouts/" (file-name-nondirectory (buffer-file-name)) ".pdf"))
   (ps-print-buffer-with-faces tjwps)
-  (shell-command (concat "/usr/bin/ps2pdf " tjwps " " tjwpdf))
+  (shell-command (concat "ps2pdf " tjwps " " tjwpdf))
   (delete-file tjwps)
   (set-face-background 'default "ivory")
   )
