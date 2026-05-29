@@ -8,6 +8,7 @@
  '(ispell-program-name "/opt/local/bin/aspell")
  '(line-number-mode 1)
  '(ns-command-modifier 'meta)
+ '(package-selected-packages '(markdown-mode filladapt))
  '(safe-local-variable-values
    '((c-offsets-alist
       (inexpr-class . +)

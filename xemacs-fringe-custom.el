@@ -69,7 +69,7 @@
  '(ns-right-command-modifier 'meta)
  '(ns-tool-bar-display-mode nil t)
  '(ns-tool-bar-size-mode nil t)
- '(package-selected-packages '(filladapt))
+ '(package-selected-packages '(lua-mode cmake-mode filladapt))
  '(safe-local-variable-values
    '((c-offsets-alist
       (inexpr-class . +)
@@ -212,7 +212,7 @@
  '(nxml-delimited-data-face ((((class color) (background light)) (:inherit font-lock-string-face))))
  '(nxml-delimiter-face ((((class color) (background light)) nil)))
  '(nxml-namespace-attribute-value-face ((t (:inherit nxml-attribute-value-face))))
- '(nxml-text-face ((t nil)))
+ '(nxml-text-face ((t nil)) t)
  '(region ((((class color) (background light)) (:background "yellow"))))
  '(secondary-selection ((((class color) (background light)) (:background "peach puff"))))
  '(show-paren-mismatch ((((class color)) (:background "red" :foreground "green"))))
